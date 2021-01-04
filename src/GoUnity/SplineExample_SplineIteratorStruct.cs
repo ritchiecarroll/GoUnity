@@ -28,15 +28,15 @@ namespace go
             // SplineFollow3D structure promotion - sourced from value copy
             private readonly ptr<SplineFollow3D> m_SplineFollow3DRef;
 
-            private ref SplineFollow3D SplineFollow3D_val => ref m_SplineFollow3DRef.Value;
+            private ref SplineFollow3D SplineFollow3D_val => ref m_SplineFollow3DRef.val;
 
-            public ref nint Segments => ref m_SplineFollow3DRef.Value.Segments;
+            public ref nint Segments => ref m_SplineFollow3DRef.val.Segments;
 
-            public ref bool DoLoop => ref m_SplineFollow3DRef.Value.DoLoop;
+            public ref bool DoLoop => ref m_SplineFollow3DRef.val.DoLoop;
 
-            public ref Transform Cube => ref m_SplineFollow3DRef.Value.Cube;
+            public ref Transform Cube => ref m_SplineFollow3DRef.val.Cube;
 
-            public ref float Speed => ref m_SplineFollow3DRef.Value.Speed;
+            public ref float Speed => ref m_SplineFollow3DRef.val.Speed;
 
             // Constructors
             public SplineIterator(NilType _)
