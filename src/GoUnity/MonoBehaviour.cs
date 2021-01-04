@@ -1,4 +1,4 @@
-// package GoUnity -- go2cs converted at 2021 January 03 23:49:22 UTC
+// package GoUnity -- go2cs converted at 2021 January 04 00:17:04 UTC
 // import "GoUnity" ==> using GoUnity = go.GoUnity_package
 // Original source: C:\Projects\GoUnity\src\GoUnity\MonoBehaviour.go
 
