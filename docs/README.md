@@ -11,7 +11,7 @@ Initial Example:
 * Current [`go2cs`](https://go2cs.net/) Converted C# Script: [SplineExample.cs](../src/GoUnity/SplineExample.cs)
   * _Conversion is_very close!! Just need some `directive` parsing and grammar update for Go generics added to [`go2cs`](https://go2cs.net/)_
 * Desired (Operational) Conversion: [SplineExample-DesiredTarget.cs](../src/GoUnity/SplineExample-DesiredTarget.cs)
-* Target Unity Script ([`MonoBehaviour`](https://docs.unity3d.com/ScriptReference/MonoBehaviour.html) class wrapper for converted struct): [SplineExampleUnity.cs](../src/GoUnity/SplineExampleUnity.cs)
+* Target Unity Script ([`MonoBehaviour`](https://docs.unity3d.com/ScriptReference/MonoBehaviour.html) class wrapper for converted struct): [SplineFollow3D.cs](../src/GoUnity/SplineFollow3D.cs)
 * Initial Go-based MonoBehaviour: [MonoBehaviour.go](../src/GoUnity/MonoBehaviour.go)
 
 ![Screenshot](img/Screenshot.png)

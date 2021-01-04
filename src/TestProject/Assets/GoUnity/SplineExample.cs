@@ -1,12 +1,12 @@
 // package GoUnity -- go2cs converted at 2021 January 03 23:49:24 UTC
 // import "GoUnity" ==> using GoUnity = go.GoUnity_package
 // Original source: C:\Projects\GoUnity\src\GoUnity\SplineExample.go
-using fmt = go.fmt_package;
-using static go.builtin;
-
 using System.Collections.Generic;
 using UnityEngine;
 using Vectrosity;
+
+using fmt = go.fmt_package;
+using static go.builtin;
 
 #pragma warning disable CS0660, CS0661, CS0282
 
@@ -14,10 +14,10 @@ namespace go
 {
     public static partial class GoUnity_package
     {
-        // post-build[unity-target: type=MonoBehaviour; filename=SplineExampleUnity.cs; namespace=SplineExample]
+        //go2cs: post-build[unity-target.exe type=MonoBehaviour filename=SplineFollow3D.cs namespace=SplineExample]
         public partial struct SplineFollow3D
         {
-            public int Segments; // These public fields will be exposed to Unity editor
+            public int Segments; // <- these public fields will be exposed to Unity editor
             public bool DoLoop;
             public Transform Cube;
             public float Speed;
@@ -25,7 +25,7 @@ namespace go
 
         public partial struct SplineIterator
         {
-            public ref SplineFollow3D SplineFollow3D => ref SplineFollow3D_val;
+            public ptr<SplineFollow3D> source;
             public VectorLine line;
             public float dist;
         }
@@ -69,20 +69,22 @@ namespace go
             line.MakeSpline(splinePoints.ToArray(), behaviour.Segments, behaviour.DoLoop);
             line.Draw3D();
 
-            return new IEnumerator<SplineIterator>(addr(new SplineIterator(_addr_behaviour, line,0.0F)));
+            return new IEnumerator<SplineIterator>(addr(new SplineIterator(ref _addr_behaviour, line,0.0F)));
         }
 
         private static bool MoveNext(this ptr<SplineIterator> _addr_iterator)
         {
             ref SplineIterator iterator = ref _addr_iterator.val;
- 
+
+            ref SplineFollow3D behaviour = ref iterator.source.val;
+
             // Make the cube "ride" the spline at a constant speed
             if (iterator.dist < 1.0F)
             {
-                iterator.dist += Time.deltaTime * iterator.Speed;
-                iterator.Cube.position = iterator.line.GetPoint3D01(iterator.dist);
+                iterator.dist += Time.deltaTime * behaviour.Speed;
+                behaviour.Cube.position = iterator.line.GetPoint3D01(iterator.dist);
             }
-            else if (iterator.DoLoop)
+            else if (behaviour.DoLoop)
             {
                 _addr_iterator.Reset();
             }

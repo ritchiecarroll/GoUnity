@@ -1,19 +1,19 @@
 package GoUnity
 
-import (
-    "fmt"
-)
-
 // TODO: Modify go2cs to properly pickup the following directives
 //go2cs: inject-code[using System.Collections.Generic;]
 //go2cs: inject-code[using UnityEngine;]
 //go2cs: inject-code[using Vectrosity;]
 
+import (
+    "fmt"
+)
+
 // TODO: Directive that will call a post-build utility on specifed target, in this case
 // wrapping converted SplineFollow3D structure with a class that inherits MonoBehaviour
-//go2cs: post-build[unity-target: type=MonoBehaviour; filename=SplineFollow3D.cs; namespace=SplineExample]
+//go2cs: post-build[unity-target.exe type=MonoBehaviour filename=SplineFollow3D.cs namespace=SplineExample]
 type SplineFollow3D struct {
-    Segments int        // These public fields will be exposed to Unity editor
+    Segments int    // <- these public fields will be exposed to Unity editor
     DoLoop bool
     Cube Transform
     Speed float32
@@ -27,19 +27,19 @@ type SplineIterator struct {
 
 func (behaviour *SplineFollow3D) Awake() {
     // Set initial default values, Unity will serialize changes made in editor
-    if (Segments == 0) {
-        Segments = 250
-        DoLoop = true
-        Speed = 0.05
+    if (behaviour.Segments == 0) {
+        behaviour.Segments = 250
+        behaviour.DoLoop = true
+        behaviour.Speed = 0.05
     }
 }
 
 func (behaviour *SplineFollow3D) Start() IEnumerator {
     // Note that VectorLine expects a .NET List of Vector3 objects - this does not need
     // to exist here in Go (not compiling here), it just needs to be valid Go syntax for
-    // the go2cs conversion process. Unity will compile translated C# version of code,
+    // the go2cs conversion process. Unity will compile translated C# version of code.
     // TODO: Fix Golang grammar to support new generics syntax, e.g.: List[Vector3] => List<Vector3>
-    points := _List_Vector3_{behaviour.Segments+1}
+    points := List_Vector3_{behaviour.Segments+1}
 
     var splinePoints []Vector3
     i := 1
@@ -61,11 +61,13 @@ func (behaviour *SplineFollow3D) Start() IEnumerator {
 }
 
 func (iterator *SplineIterator) MoveNext() bool {
+     behaviour := iterator.source
+
     // Make the cube "ride" the spline at a constant speed
     if iterator.dist < 1.0 {
-        iterator.dist += Time.deltaTime*iterator.source.Speed
-        iterator.source.Cube.position = iterator.line.GetPoint3D01(iterator.dist)
-    } else if iterator.source.DoLoop {
+        iterator.dist += Time.deltaTime*behaviour.Speed
+        behaviour.Cube.position = iterator.line.GetPoint3D01(iterator.dist)
+    } else if behaviour.DoLoop {
         iterator.Reset()
     } else {
         return false

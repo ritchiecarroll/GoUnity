@@ -27,14 +27,14 @@ namespace go
         {
         #if NET5_0
             [MethodImpl(MethodImplOptions.AggressiveInlining), DebuggerNonUserCode]
-            public static StartCoroutine As<T>(in T target) => (StartCoroutine<T>)target!;
+            public static IStartCoroutine As<T>(in T target) => (IStartCoroutine<T>)target!;
 
             [MethodImpl(MethodImplOptions.AggressiveInlining), DebuggerNonUserCode]
-            public static StartCoroutine As<T>(ptr<T> target_ptr) => (StartCoroutine<T>)target_ptr;
+            public static IStartCoroutine As<T>(ptr<T> target_ptr) => (IStartCoroutine<T>)target_ptr;
 
             [MethodImpl(MethodImplOptions.AggressiveInlining), DebuggerNonUserCode]
-            public static StartCoroutine? As(object target) =>
-                typeof(StartCoroutine<>).CreateInterfaceHandler<StartCoroutine>(target);
+            public static IStartCoroutine? As(object target) =>
+                typeof(IStartCoroutine<>).CreateInterfaceHandler<IStartCoroutine>(target);
         #endif
         }
 
@@ -131,7 +131,7 @@ namespace go
 
 namespace go
 {
-    public static class GoUnity_StartCoroutineExtensions
+    public static class GoUnity_IStartCoroutineExtensions
     {
         private static readonly ConcurrentDictionary<Type, MethodInfo> s_conversionOperators = new ConcurrentDictionary<Type, MethodInfo>();
 

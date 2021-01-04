@@ -1,6 +1,11 @@
-// package GoUnity -- go2cs converted at 2021 January 04 10:02:35 UTC
+// package GoUnity -- go2cs converted at 2021 January 04 16:00:29 UTC
 // import "GoUnity" ==> using GoUnity = go.GoUnity_package
-// Original source: C:\Projects\GoUnity\src\GoUnity\SplineExample.go
+// Original source: D:\Projects\GoUnity\src\GoUnity\SplineExample.go
+// TODO: Modify go2cs to properly pickup the following directives
+//go2cs: inject-code[using System.Collections.Generic;]
+//go2cs: inject-code[using UnityEngine;]
+//go2cs: inject-code[using Vectrosity;]
+
 using fmt = go.fmt_package;
 using static go.builtin;
 
@@ -8,17 +13,12 @@ namespace go
 {
     public static partial class GoUnity_package
     {
-        // TODO: Modify go2cs to properly pickup the following directives
-        //go2cs: inject-code[using System.Collections.Generic;]
-        //go2cs: inject-code[using UnityEngine;]
-        //go2cs: inject-code[using Vectrosity;]
-
         // TODO: Directive that will call a post-build utility on specifed target, in this case
         // wrapping converted SplineFollow3D structure with a class that inherits MonoBehaviour
-        //go2cs: post-build[unity-target: type=MonoBehaviour; filename=SplineFollow3D.cs; namespace=SplineExample]
+        //go2cs: post-build[unity-target.exe type=MonoBehaviour filename=SplineFollow3D.cs namespace=SplineExample]
         public partial struct SplineFollow3D
         {
-            public nint Segments; // These public fields will be exposed to Unity editor
+            public nint Segments; // <- these public fields will be exposed to Unity editor
             public bool DoLoop;
             public Transform Cube;
             public float Speed;
@@ -36,11 +36,11 @@ namespace go
             ref SplineFollow3D behaviour = ref _addr_behaviour.val;
  
             // Set initial default values, Unity will serialize changes made in editor
-            if ((Segments == 0))
+            if ((behaviour.Segments == 0))
             {
-                Segments = 250;
-                DoLoop = true;
-                Speed = 0.05F;
+                behaviour.Segments = 250;
+                behaviour.DoLoop = true;
+                behaviour.Speed = 0.05F;
             }
         }
 
@@ -50,9 +50,9 @@ namespace go
  
             // Note that VectorLine expects a .NET List of Vector3 objects - this does not need
             // to exist here in Go (not compiling here), it just needs to be valid Go syntax for
-            // the go2cs conversion process. Unity will compile translated C# version of code,
+            // the go2cs conversion process. Unity will compile translated C# version of code.
             // TODO: Fix Golang grammar to support new generics syntax, e.g.: List[Vector3] => List<Vector3>
-            _List_Vector3_ points = new _List_Vector3_(behaviour.Segments+1);
+            List_Vector3_ points = new List_Vector3_(behaviour.Segments+1);
 
             slice<Vector3> splinePoints = default;
             nint i = 1;
@@ -78,14 +78,16 @@ namespace go
         private static bool MoveNext(this ptr<SplineIterator> _addr_iterator)
         {
             ref SplineIterator iterator = ref _addr_iterator.val;
- 
+
+            var behaviour = iterator.source; 
+
             // Make the cube "ride" the spline at a constant speed
             if (iterator.dist < 1.0F)
             {
-                iterator.dist += Time.deltaTime * iterator.source.Speed;
-                iterator.source.Cube.position = iterator.line.GetPoint3D01(iterator.dist);
+                iterator.dist += Time.deltaTime * behaviour.Speed;
+                behaviour.Cube.position = iterator.line.GetPoint3D01(iterator.dist);
             }
-            else if (iterator.source.DoLoop)
+            else if (behaviour.DoLoop)
             {
                 iterator.Reset();
             }
