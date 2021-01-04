@@ -30,6 +30,13 @@ bld/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
+[Tt]emp/
+[Ll]ibrary/
+[Bb]uild/
+[Bb]uilds/
+Assets/AssetStoreTools*
+*.csproj
+*.unityproj
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
@@ -69,7 +76,7 @@ StyleCopReport.xml
 *_p.c
 *_h.h
 *.ilk
-*.meta
+# *.meta <- these are important Unity files
 *.obj
 *.iobj
 *.pch
@@ -169,6 +176,13 @@ DocProject/Help/html
 # Click-Once directory
 publish/
 
+# Unity3D Generated File On Crash Reports
+sysinfo.txt
+
+# Unity3D generated meta files
+*.pidb.meta
+*.pdb.meta
+
 # Publish Web Output
 *.[Pp]ublish.xml
 *.azurePubxml
@@ -212,6 +226,8 @@ _pkginfo.txt
 *.appx
 *.appxbundle
 *.appxupload
+*.apk
+*.unitypackage
 
 # Visual Studio cache files
 # files ending in .cache can be ignored

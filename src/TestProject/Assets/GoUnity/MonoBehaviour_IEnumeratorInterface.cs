@@ -4,7 +4,7 @@
 //     file may cause incorrect behavior and will be lost
 //     if the code is regenerated.
 //
-//     Generated on 2021 January 04 10:02:34 UTC
+//     Generated on 2021 January 04 00:17:04 UTC
 // </auto-generated>
 //---------------------------------------------------------
 using System;
@@ -13,9 +13,9 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using static go.builtin;
 
-
-#nullable enable
+//#nullable enable
 #pragma warning disable CS0660, CS0661
 
 namespace go
@@ -25,6 +25,7 @@ namespace go
         [GeneratedCode("go2cs", "0.1.0.0")]
         public partial interface IEnumerator
         {
+        #if NET5_0
             [MethodImpl(MethodImplOptions.AggressiveInlining), DebuggerNonUserCode]
             public static IEnumerator As<T>(in T target) => (IEnumerator<T>)target!;
 
@@ -34,13 +35,14 @@ namespace go
             [MethodImpl(MethodImplOptions.AggressiveInlining), DebuggerNonUserCode]
             public static IEnumerator? As(object target) =>
                 typeof(IEnumerator<>).CreateInterfaceHandler<IEnumerator>(target);
+        #endif
         }
 
         [GeneratedCode("go2cs", "0.1.0.0")]
         public class IEnumerator<T> : IEnumerator
         {
-            private T m_target = default!;
-            private readonly ptr<T>? m_target_ptr;
+            private T m_target = default;
+            private readonly ptr<T> m_target_ptr;
             private readonly bool m_target_is_ptr;
 
             public ref T Target
@@ -62,14 +64,14 @@ namespace go
                 m_target_is_ptr = true;
             }
 
-            private delegate bool CurrentByPtr(ptr<T> value);
-            private delegate bool CurrentByVal(T value);
+            private delegate object CurrentByPtr(ptr<T> value);
+            private delegate object CurrentByVal(T value);
 
-            private static readonly CurrentByPtr? s_CurrentByPtr;
-            private static readonly CurrentByVal? s_CurrentByVal;
+            private static readonly CurrentByPtr s_CurrentByPtr;
+            private static readonly CurrentByVal s_CurrentByVal;
 
             [DebuggerNonUserCode, MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public bool Current()
+            public object Current()
             {
                 T target = m_target;
 
@@ -77,7 +79,7 @@ namespace go
                     target = m_target_ptr.val;
 
                 if (s_CurrentByPtr is null || !m_target_is_ptr)
-                    return s_CurrentByVal!(target);
+                    return s_CurrentByVal(target);
 
                 return s_CurrentByPtr(m_target_ptr);
             }
@@ -85,8 +87,8 @@ namespace go
             private delegate bool MoveNextByPtr(ptr<T> value);
             private delegate bool MoveNextByVal(T value);
 
-            private static readonly MoveNextByPtr? s_MoveNextByPtr;
-            private static readonly MoveNextByVal? s_MoveNextByVal;
+            private static readonly MoveNextByPtr s_MoveNextByPtr;
+            private static readonly MoveNextByVal s_MoveNextByVal;
 
             [DebuggerNonUserCode, MethodImpl(MethodImplOptions.AggressiveInlining)]
             public bool MoveNext()
@@ -97,19 +99,19 @@ namespace go
                     target = m_target_ptr.val;
 
                 if (s_MoveNextByPtr is null || !m_target_is_ptr)
-                    return s_MoveNextByVal!(target);
+                    return s_MoveNextByVal(target);
 
                 return s_MoveNextByPtr(m_target_ptr);
             }
 
-            private delegate bool ResetByPtr(ptr<T> value);
-            private delegate bool ResetByVal(T value);
+            private delegate void ResetByPtr(ptr<T> value);
+            private delegate void ResetByVal(T value);
 
-            private static readonly ResetByPtr? s_ResetByPtr;
-            private static readonly ResetByVal? s_ResetByVal;
+            private static readonly ResetByPtr s_ResetByPtr;
+            private static readonly ResetByVal s_ResetByVal;
 
             [DebuggerNonUserCode, MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public bool Reset()
+            public void Reset()
             {
                 T target = m_target;
 
@@ -117,12 +119,15 @@ namespace go
                     target = m_target_ptr.val;
 
                 if (s_ResetByPtr is null || !m_target_is_ptr)
-                    return s_ResetByVal!(target);
+                {
+                    s_ResetByVal(target);
+                    return;
+                }
 
-                return s_ResetByPtr(m_target_ptr);
+                s_ResetByPtr(m_target_ptr);
             }
             
-            public string ToString(string? format, IFormatProvider? formatProvider) => format;
+            public string ToString(string format, IFormatProvider formatProvider) => format;
 
             [DebuggerStepperBoundary]
             static IEnumerator()
@@ -222,43 +227,43 @@ namespace go
             }
             catch (PanicException)
             {
-                result = default!;
+                result = default;
                 return false;
             }
         }
 
-        [GeneratedCode("go2cs", "0.1.0.0"), MethodImpl(MethodImplOptions.AggressiveInlining), DebuggerNonUserCode]
-        public static object? _(this go.GoUnity_package.IEnumerator target, Type type)
-        {
-            try
-            {
-                MethodInfo? conversionOperator = s_conversionOperators.GetOrAdd(type, _ => typeof(go.GoUnity_package.IEnumerator<>).GetExplicitGenericConversionOperator(type));
+        //[GeneratedCode("go2cs", "0.1.0.0"), MethodImpl(MethodImplOptions.AggressiveInlining), DebuggerNonUserCode]
+        //public static object _(this go.GoUnity_package.IEnumerator target, Type type)
+        //{
+        //    try
+        //    {
+        //        MethodInfo conversionOperator = s_conversionOperators.GetOrAdd(type, _ => typeof(go.GoUnity_package.IEnumerator<>).GetExplicitGenericConversionOperator(type));
 
-                if (conversionOperator is null)
-                    throw new PanicException($"interface conversion: failed to create converter for {GetGoTypeName(target.GetType())} to {GetGoTypeName(type)}");
+        //        if (conversionOperator is null)
+        //            throw new PanicException($"interface conversion: failed to create converter for {GetGoTypeName(target.GetType())} to {GetGoTypeName(type)}");
 
-                dynamic? result = conversionOperator.Invoke(null, new object[] { target });
-                return result?.Target;
-            }
-            catch (NotImplementedException ex)
-            {
-                throw new PanicException($"interface conversion: {GetGoTypeName(target.GetType())} is not {GetGoTypeName(type)}: missing method {ex.InnerException?.Message}");
-            }
-        }
+        //        dynamic result = conversionOperator.Invoke(null, new object[] { target });
+        //        return result?.Target;
+        //    }
+        //    catch (NotImplementedException ex)
+        //    {
+        //        throw new PanicException($"interface conversion: {GetGoTypeName(target.GetType())} is not {GetGoTypeName(type)}: missing method {ex.InnerException?.Message}");
+        //    }
+        //}
 
-        [GeneratedCode("go2cs", "0.1.0.0"), MethodImpl(MethodImplOptions.AggressiveInlining), DebuggerNonUserCode]
-        public static bool _(this go.GoUnity_package.IEnumerator target, Type type, out object? result)
-        {
-            try
-            {
-                result = target._(type);
-                return true;
-            }
-            catch (PanicException)
-            {
-                result = type.IsValueType ? Activator.CreateInstance(type) : null;
-                return false;
-            }
-        }
+        //[GeneratedCode("go2cs", "0.1.0.0"), MethodImpl(MethodImplOptions.AggressiveInlining), DebuggerNonUserCode]
+        //public static bool _(this go.GoUnity_package.IEnumerator target, Type type, out object result)
+        //{
+        //    try
+        //    {
+        //        result = target._(type);
+        //        return true;
+        //    }
+        //    catch (PanicException)
+        //    {
+        //        result = type.IsValueType ? Activator.CreateInstance(type) : null;
+        //        return false;
+        //    }
+        //}
     }
 }

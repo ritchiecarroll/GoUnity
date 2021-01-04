@@ -4,7 +4,7 @@
 //     file may cause incorrect behavior and will be lost
 //     if the code is regenerated.
 //
-//     Generated on 2021 January 04 10:02:35 UTC
+//     Generated on 2021 January 04 00:17:05 UTC
 // </auto-generated>
 //---------------------------------------------------------
 using System;
@@ -12,10 +12,12 @@ using System.CodeDom.Compiler;
 using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using UnityEngine;
 using static go.builtin;
 using fmt = go.fmt_package;
 
-#nullable enable
+//#nullable enable
+#pragma warning disable CS0660, CS0661
 
 namespace go
 {
@@ -33,7 +35,7 @@ namespace go
                 this.Speed = default;
             }
 
-            public SplineFollow3D(nint Segments = default, bool DoLoop = default, Transform Cube = default, float Speed = default)
+            public SplineFollow3D(int Segments = default, bool DoLoop = default, Transform Cube = default, float Speed = default)
             {
                 this.Segments = Segments;
                 this.DoLoop = DoLoop;
@@ -58,10 +60,10 @@ namespace go
             public static implicit operator SplineFollow3D(NilType nil) => default(SplineFollow3D);
         }
 
-        [GeneratedCode("go2cs", "0.1.0.0")]
-        public static SplineFollow3D SplineFollow3D_cast(dynamic value)
-        {
-            return new SplineFollow3D(value.Segments, value.DoLoop, value.Cube, value.Speed);
-        }
+        //[GeneratedCode("go2cs", "0.1.0.0")]
+        //public static SplineFollow3D SplineFollow3D_cast(dynamic value)
+        //{
+        //    return new SplineFollow3D(value.Segments, value.DoLoop, value.Cube, value.Speed);
+        //}
     }
 }

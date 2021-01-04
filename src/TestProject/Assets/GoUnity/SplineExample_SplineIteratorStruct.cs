@@ -4,7 +4,7 @@
 //     file may cause incorrect behavior and will be lost
 //     if the code is regenerated.
 //
-//     Generated on 2021 January 04 10:02:35 UTC
+//     Generated on 2021 January 04 00:17:05 UTC
 // </auto-generated>
 //---------------------------------------------------------
 using System;
@@ -12,10 +12,12 @@ using System.CodeDom.Compiler;
 using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using UnityEngine;
+using Vectrosity;
 using static go.builtin;
 using fmt = go.fmt_package;
 
-#nullable enable
+//#nullable enable
 
 namespace go
 {
@@ -24,17 +26,30 @@ namespace go
         [GeneratedCode("go2cs", "0.1.0.0")]
         public partial struct SplineIterator
         {
+            // SplineFollow3D structure promotion - sourced from value copy
+            private readonly ptr<SplineFollow3D> m_SplineFollow3DRef;
+
+            private ref SplineFollow3D SplineFollow3D_val => ref m_SplineFollow3DRef.val;
+
+            public ref int Segments => ref m_SplineFollow3DRef.val.Segments;
+
+            public ref bool DoLoop => ref m_SplineFollow3DRef.val.DoLoop;
+
+            public ref Transform Cube => ref m_SplineFollow3DRef.val.Cube;
+
+            public ref float Speed => ref m_SplineFollow3DRef.val.Speed;
+
             // Constructors
             public SplineIterator(NilType _)
             {
-                this.source = default;
+                this.m_SplineFollow3DRef = new ptr<SplineFollow3D>(new SplineFollow3D(nil));
                 this.line = default;
                 this.dist = default;
             }
 
-            public SplineIterator(ref ptr<SplineFollow3D> source = default, VectorLine line = default, float dist = default)
+            public SplineIterator(ptr<SplineFollow3D> SplineFollow3D = default, VectorLine line = default, float dist = default)
             {
-                this.source = source;
+                this.m_SplineFollow3DRef = SplineFollow3D;
                 this.line = line;
                 this.dist = dist;
             }
@@ -56,10 +71,10 @@ namespace go
             public static implicit operator SplineIterator(NilType nil) => default(SplineIterator);
         }
 
-        [GeneratedCode("go2cs", "0.1.0.0")]
-        public static SplineIterator SplineIterator_cast(dynamic value)
-        {
-            return new SplineIterator(ref value.source, value.line, value.dist);
-        }
+        //[GeneratedCode("go2cs", "0.1.0.0")]
+        //public static SplineIterator SplineIterator_cast(dynamic value)
+        //{
+        //    return new SplineIterator(value.SplineFollow3D, value.line, value.dist);
+        //}
     }
 }

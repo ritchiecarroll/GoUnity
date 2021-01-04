@@ -1,4 +1,4 @@
-// package GoUnity -- go2cs converted at 2021 January 04 00:17:05 UTC
+// package GoUnity -- go2cs converted at 2021 January 04 10:02:35 UTC
 // import "GoUnity" ==> using GoUnity = go.GoUnity_package
 // Original source: C:\Projects\GoUnity\src\GoUnity\SplineExample.go
 using fmt = go.fmt_package;
@@ -15,7 +15,7 @@ namespace go
 
         // TODO: Directive that will call a post-build utility on specifed target, in this case
         // wrapping converted SplineFollow3D structure with a class that inherits MonoBehaviour
-        //go2cs: post-build[unity-target: type=MonoBehaviour; filename=SplineExampleUnity.cs; namespace=SplineExample]
+        //go2cs: post-build[unity-target: type=MonoBehaviour; filename=SplineFollow3D.cs; namespace=SplineExample]
         public partial struct SplineFollow3D
         {
             public nint Segments; // These public fields will be exposed to Unity editor
@@ -26,7 +26,7 @@ namespace go
 
         public partial struct SplineIterator
         {
-            public ref SplineFollow3D SplineFollow3D => ref SplineFollow3D_val;
+            public ptr<SplineFollow3D> source;
             public VectorLine line;
             public float dist;
         }
@@ -82,10 +82,10 @@ namespace go
             // Make the cube "ride" the spline at a constant speed
             if (iterator.dist < 1.0F)
             {
-                iterator.dist += Time.deltaTime * iterator.Speed;
-                iterator.Cube.position = iterator.line.GetPoint3D01(dist);
+                iterator.dist += Time.deltaTime * iterator.source.Speed;
+                iterator.source.Cube.position = iterator.line.GetPoint3D01(iterator.dist);
             }
-            else if (iterator.DoLoop)
+            else if (iterator.source.DoLoop)
             {
                 iterator.Reset();
             }
@@ -103,7 +103,7 @@ namespace go
             iterator.dist = 0.0F;
         }
 
-        private static void Current(this ptr<SplineIterator> _addr_iterator)
+        private static object Current(this ptr<SplineIterator> _addr_iterator)
         {
             ref SplineIterator iterator = ref _addr_iterator.val;
 

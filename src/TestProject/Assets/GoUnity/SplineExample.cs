@@ -55,13 +55,13 @@ namespace go
             slice<Vector3> splinePoints = default;
             int i = 1;
 
-            var obj = GameObject.Find(fmt.Sprintf("Sphere%d", i));
+            var obj = GameObject.Find(fmt.Sprintf("Sphere{0}", i));
             i += 1;
 
             while ((obj != null))
             {
                 splinePoints = append(splinePoints, obj.transform.position);
-                obj = GameObject.Find(fmt.Sprintf("Sphere%d", i));
+                obj = GameObject.Find(fmt.Sprintf("Sphere{0}", i));
                 i += 1;
             }
 

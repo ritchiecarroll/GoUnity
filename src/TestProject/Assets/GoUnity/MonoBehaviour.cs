@@ -1,4 +1,4 @@
-// package GoUnity -- go2cs converted at 2021 January 04 10:02:34 UTC
+// package GoUnity -- go2cs converted at 2021 January 04 00:17:04 UTC
 // import "GoUnity" ==> using GoUnity = go.GoUnity_package
 // Original source: C:\Projects\GoUnity\src\GoUnity\MonoBehaviour.go
 
@@ -37,9 +37,9 @@ namespace go
         // Iterator Interface for Coroutines
         public partial interface IEnumerator
         {
-            bool Current();
+            object Current();
             bool MoveNext();
-            bool Reset();
+            void Reset();
         }
 
         // Unity Message Handlers
@@ -48,76 +48,9 @@ namespace go
             void Awake();
         }
 
-        public partial interface IStart
-        {
-            void Start();
-        }
-
         public partial interface IStartCoroutine
         {
             IEnumerator Start();
         }
-
-        public partial interface IFixedUpdate
-        {
-            void FixedUpdate();
-        }
-
-        public partial interface ILateUpdate
-        {
-            void LateUpdate();
-        }
-
-        public partial interface IUpdate
-        {
-            void Update();
-        }
-
-        public partial interface IOnAnimatorIK
-        {
-            void OnAnimatorIK(nint layerIndex);
-        }
-
-        public partial interface IOnAnimatorMove
-        {
-            void OnAnimatorMove();
-        }
-
-        public partial interface IOnApplicationFocus
-        {
-            void OnApplicationFocus(bool hasFocus);
-        }
-
-        public partial interface IOnApplicationPause
-        {
-            void OnApplicationPause(bool pauseStatus);
-        }
-
-        public partial interface IOnApplicationQuit
-        {
-            void OnApplicationQuit();
-        }
-
-        public partial interface IOnAudioFilterRead
-        {
-            void OnAudioFilterRead(slice<float> data, nint channels);
-        }
-
-        public partial interface IOnBecameInvisible
-        {
-            void OnBecameInvisible();
-        }
-
-        public partial interface IOnBecameVisible
-        {
-            void OnBecameVisible();
-        }
-
-        public partial interface IOnCollisionEnter
-        {
-            void OnCollisionEnter(Collision other);
-        }
-
-        // ... many more messages to define, work, work, work ...
     }
 }

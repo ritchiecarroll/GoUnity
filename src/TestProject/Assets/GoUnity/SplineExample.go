@@ -11,7 +11,7 @@ import (
 
 // TODO: Directive that will call a post-build utility on specifed target, in this case
 // wrapping converted SplineFollow3D structure with a class that inherits MonoBehaviour
-//go2cs: post-build[unity-target: type=MonoBehaviour; filename=SplineFollow3D.cs; namespace=SplineExample]
+//go2cs: post-build[unity-target: type=MonoBehaviour; filename=SplineExampleUnity.cs; namespace=SplineExample]
 type SplineFollow3D struct {
     Segments int        // These public fields will be exposed to Unity editor
     DoLoop bool
@@ -78,6 +78,6 @@ func (iterator *SplineIterator) Reset() {
     iterator.dist = 0.0
 }
 
-func (iterator *SplineIterator) Current() object {
+func (iterator *SplineIterator) Current() interface{} {
     return nil
 }
