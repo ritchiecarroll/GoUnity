@@ -7,11 +7,11 @@ import (
 // TODO: Modify go2cs to properly pickup the following directives
 //go2cs: inject-code[using System.Collections.Generic;]
 //go2cs: inject-code[using UnityEngine;]
-//go2cs: inject-code[using Vectrocity;]
+//go2cs: inject-code[using Vectrosity;]
 
 // TODO: Directive that will call a post-build utility on specifed target, in this case
 // wrapping converted SplineFollow3D structure with a class that inherits MonoBehaviour
-//go2cs: post-build[unity-target: type=MonoBehaviour; filename=SplineExampleUnity.cs; namespace=SplineExample]
+//go2cs: post-build[unity-target: type=MonoBehaviour; filename=SplineFollow3D.cs; namespace=SplineExample]
 type SplineFollow3D struct {
     Segments int        // These public fields will be exposed to Unity editor
     DoLoop bool
@@ -78,6 +78,6 @@ func (iterator *SplineIterator) Reset() {
     iterator.dist = 0.0
 }
 
-func (iterator *SplineIterator) Current() interface{} {
+func (iterator *SplineIterator) Current() object {
     return nil
 }

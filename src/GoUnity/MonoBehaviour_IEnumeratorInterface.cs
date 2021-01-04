@@ -13,7 +13,7 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-
+using static go.builtin;
 
 #nullable enable
 #pragma warning disable CS0660, CS0661
@@ -25,6 +25,7 @@ namespace go
         [GeneratedCode("go2cs", "0.1.0.0")]
         public partial interface IEnumerator
         {
+        #if NET5_0
             [MethodImpl(MethodImplOptions.AggressiveInlining), DebuggerNonUserCode]
             public static IEnumerator As<T>(in T target) => (IEnumerator<T>)target!;
 
@@ -34,6 +35,7 @@ namespace go
             [MethodImpl(MethodImplOptions.AggressiveInlining), DebuggerNonUserCode]
             public static IEnumerator? As(object target) =>
                 typeof(IEnumerator<>).CreateInterfaceHandler<IEnumerator>(target);
+        #endif
         }
 
         [GeneratedCode("go2cs", "0.1.0.0")]
@@ -62,14 +64,14 @@ namespace go
                 m_target_is_ptr = true;
             }
 
-            private delegate bool CurrentByPtr(ptr<T> value);
-            private delegate bool CurrentByVal(T value);
+            private delegate object CurrentByPtr(ptr<T> value);
+            private delegate object CurrentByVal(T value);
 
             private static readonly CurrentByPtr? s_CurrentByPtr;
             private static readonly CurrentByVal? s_CurrentByVal;
 
             [DebuggerNonUserCode, MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public bool Current()
+            public object Current()
             {
                 T target = m_target;
 
@@ -102,14 +104,14 @@ namespace go
                 return s_MoveNextByPtr(m_target_ptr);
             }
 
-            private delegate bool ResetByPtr(ptr<T> value);
-            private delegate bool ResetByVal(T value);
+            private delegate void ResetByPtr(ptr<T> value);
+            private delegate void ResetByVal(T value);
 
             private static readonly ResetByPtr? s_ResetByPtr;
             private static readonly ResetByVal? s_ResetByVal;
 
             [DebuggerNonUserCode, MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public bool Reset()
+            public void Reset()
             {
                 T target = m_target;
 
@@ -117,9 +119,12 @@ namespace go
                     target = m_target_ptr.val;
 
                 if (s_ResetByPtr is null || !m_target_is_ptr)
-                    return s_ResetByVal!(target);
+                {
+                    s_ResetByVal(target);
+                    return;
+                }
 
-                return s_ResetByPtr(m_target_ptr);
+                s_ResetByPtr(m_target_ptr);
             }
             
             public string ToString(string? format, IFormatProvider? formatProvider) => format;

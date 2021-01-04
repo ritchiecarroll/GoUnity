@@ -37,9 +37,9 @@ namespace go
         // Iterator Interface for Coroutines
         public partial interface IEnumerator
         {
-            bool Current();
+            object Current();
             bool MoveNext();
-            bool Reset();
+            void Reset();
         }
 
         // Unity Message Handlers

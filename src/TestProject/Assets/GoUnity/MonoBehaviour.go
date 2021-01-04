@@ -28,39 +28,40 @@ func Destroy(obj interface{}, t float32) {}
 
 // Iterator Interface for Coroutines
 type IEnumerator interface {
-    Current() interface{}
+    Current() object
     MoveNext() bool
     Reset()
 }
 
 // Unity Message Handlers
-type Awake interface { Awake() }
+type IAwake interface { Awake() }
 
-type Start interface { Start() }
+type IStart interface { Start() }
 
-type StartCoroutine interface { Start() IEnumerator }
+type IStartCoroutine interface { Start() IEnumerator }
 
-type FixedUpdate interface { FixedUpdate() }
+type IFixedUpdate interface { FixedUpdate() }
 
-type LateUpdate interface { LateUpdate() }
+type ILateUpdate interface { LateUpdate() }
 
-type Update interface { Update() }
+type IUpdate interface { Update() }
 
-type OnAnimatorIK interface { OnAnimatorIK(layerIndex int) }
+type IOnAnimatorIK interface { OnAnimatorIK(layerIndex int) }
 
-type OnAnimatorMove interface { OnAnimatorMove() }
+type IOnAnimatorMove interface { OnAnimatorMove() }
 
-type OnApplicationFocus interface { OnApplicationFocus(hasFocus bool) }
+type IOnApplicationFocus interface { OnApplicationFocus(hasFocus bool) }
 
-type OnApplicationPause interface { OnApplicationPause(pauseStatus bool)}
+type IOnApplicationPause interface { OnApplicationPause(pauseStatus bool)}
 
-type OnApplicationQuit interface { OnApplicationQuit() }
+type IOnApplicationQuit interface { OnApplicationQuit() }
 
-type OnAudioFilterRead interface { OnAudioFilterRead(data []float32, channels int) }
+type IOnAudioFilterRead interface { OnAudioFilterRead(data []float32, channels int) }
 
-type OnBecameInvisible interface { OnBecameInvisible() }
+type IOnBecameInvisible interface { OnBecameInvisible() }
 
-type OnBecameVisible interface { OnBecameVisible() }
+type IOnBecameVisible interface { OnBecameVisible() }
 
-//type OnCollisionEnter interface { OnCollisionEnter(other Collision) } // <- needs type defintion
+type IOnCollisionEnter interface { OnCollisionEnter(other Collision) }
+
 // ... many more messages to define, work, work, work ...

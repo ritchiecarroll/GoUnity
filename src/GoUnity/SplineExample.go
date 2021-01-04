@@ -7,7 +7,7 @@ import (
 // TODO: Modify go2cs to properly pickup the following directives
 //go2cs: inject-code[using System.Collections.Generic;]
 //go2cs: inject-code[using UnityEngine;]
-//go2cs: inject-code[using Vectrocity;]
+//go2cs: inject-code[using Vectrosity;]
 
 // TODO: Directive that will call a post-build utility on specifed target, in this case
 // wrapping converted SplineFollow3D structure with a class that inherits MonoBehaviour
